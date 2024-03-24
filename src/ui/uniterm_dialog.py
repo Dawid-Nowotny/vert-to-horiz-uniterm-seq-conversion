@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QDialog, QLabel, QLineEdit, QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QDialog, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QMessageBox
 
-from uniterm.uniterm import Uniterm
+from uniterms.uniterm import Uniterm
+from ui.alert import Alert
 from data_shelter import DataShelter
 
 class UnitermDialog(QDialog):
@@ -61,6 +62,11 @@ class UnitermDialog(QDialog):
             val_1 = self.__line_edit_1.text()
             val_2 = self.__line_edit_2.text()
 
+            if not val_1 or not val_2:
+                alert = Alert("Informacja", "Nie wpisałeś wszystkich wartości", QMessageBox.Information, self)
+                alert.show()
+                return
+
             data_shelter = DataShelter()
 
             if self.__uniterm_type is True:
@@ -71,4 +77,5 @@ class UnitermDialog(QDialog):
 
             self.close()
         except Exception as e:
-            print("An error occurred while confirming Uniterm:", e)
+            alert = Alert("Bląd", f"Podczas wprowadzania uniterm-u wystapil blad: {e}", QMessageBox.Critical, self)
+            alert.show()
