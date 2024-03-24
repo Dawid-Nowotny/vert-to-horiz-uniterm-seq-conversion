@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIcon
 
+from .side_menu import SideMenu
+
 from .config import WINDOW_WIDTH, WINDOW_HEIGHT
 
 class MainWindow(QMainWindow):
@@ -11,7 +13,12 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("AppName")
         #self.setWindowIcon(QIcon("..."))
 
+        self.__init_UI()
         self.__set_geometry()
+
+    def __init_UI(self) -> None:
+        self.side_menu = SideMenu(self)
+        self.addDockWidget(1, self.side_menu)
 
     def __set_geometry(self) -> None:
         self.showNormal()
