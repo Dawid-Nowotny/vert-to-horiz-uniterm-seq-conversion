@@ -23,9 +23,9 @@ class UnitermDialog(QDialog):
         self.__line_edit_1 = QLineEdit(self)
         self.__label_2 = QLabel(text_2, self)
         self.__line_edit_2 = QLineEdit(self)
-        self.__confirm = QPushButton('Zatwierdz', self)
+        self.__confirm_button = QPushButton('Zatwierdz', self)
 
-        self.__confirm.clicked.connect(lambda: self.__confirm_uniterm())
+        self.__confirm_button.clicked.connect(lambda: self.__confirm())
 
     def __set_layouts(self) -> None:
         vbox = QVBoxLayout()
@@ -35,9 +35,8 @@ class UnitermDialog(QDialog):
         vbox.addWidget(self.__label_2, alignment=QtCore.Qt.AlignCenter)
         vbox.addWidget(self.__line_edit_2)
 
-
         vbox.addItem(QSpacerItem(0, 15, QSizePolicy.Minimum, QSizePolicy.Fixed))
-        vbox.addWidget(self.__confirm)
+        vbox.addWidget(self.__confirm_button, alignment=QtCore.Qt.AlignCenter)
 
         vbox.setAlignment(QtCore.Qt.AlignCenter)
         container = QtWidgets.QWidget()
@@ -57,7 +56,7 @@ class UnitermDialog(QDialog):
             self.__line_edit_1.setText(data_shelter.uniterm_2.a)
             self.__line_edit_2.setText(data_shelter.uniterm_2.b)
     
-    def __confirm_uniterm(self) -> None:
+    def __confirm(self) -> None:
         try:
             val_1 = self.__line_edit_1.text()
             val_2 = self.__line_edit_2.text()
