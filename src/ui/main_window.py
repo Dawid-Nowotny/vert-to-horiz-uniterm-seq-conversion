@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QWidget
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIcon
 
@@ -17,8 +17,11 @@ class MainWindow(QMainWindow):
         self.__set_geometry()
 
     def __init_UI(self) -> None:
-        self.side_menu = SideMenu(self)
-        self.addDockWidget(1, self.side_menu)
+        self.display_operations = QWidget()
+        side_menu = SideMenu(self)
+        
+        self.addDockWidget(1, side_menu)
+        self.setCentralWidget(self.display_operations)
 
     def __set_geometry(self) -> None:
         self.showNormal()

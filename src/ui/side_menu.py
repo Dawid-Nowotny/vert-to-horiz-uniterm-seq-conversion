@@ -1,17 +1,20 @@
 from PyQt5.QtWidgets import QDockWidget, QRadioButton, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QMessageBox, QButtonGroup
+from PyQt5 import QtCore
 from typing import Optional
 
 from .uniterm_dialog import UnitermDialog
 from ui.info_dialog import InfoDialog
+from .display_operations import DisplayOperations
 from ui.alert import Alert
 from data_shelter import DataShelter
 
 class SideMenu(QDockWidget):
     def __init__(self, parent: Optional[QWidget] = None):
         super().__init__("Menu", parent)
-        
         self.__init_UI()
         self.__set_layouts()
+
+        self.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
 
     def __init_UI(self) -> None:
         self.__button_1 = QPushButton("Wprowadź pierwszy uniterm")
@@ -19,12 +22,12 @@ class SideMenu(QDockWidget):
         self.__confirm_button = QPushButton("Rysuj")
         self.__info_button = QPushButton("Informacja o aplikacji")
 
-        self.__radio_group_hor_vert = QButtonGroup()
-        self.__radio_hor = QRadioButton("Poziomo")
-        self.__radio_vert = QRadioButton("Pionowo")
-        self.__radio_hor.setChecked(True)
-        self.__radio_group_hor_vert.addButton(self.__radio_hor)
-        self.__radio_group_hor_vert.addButton(self.__radio_vert)
+        self.__radio_group_first_second = QButtonGroup()
+        self.__radio_first = QRadioButton("Za pierwszy")
+        self.__radio_second = QRadioButton("Za drugi")
+        self.__radio_first.setChecked(True)
+        self.__radio_group_first_second.addButton(self.__radio_first)
+        self.__radio_group_first_second.addButton(self.__radio_second)
         
         self.__radio_group_semi_comma = QButtonGroup()
         self.__radio_comma = QRadioButton(",")
@@ -49,8 +52,8 @@ class SideMenu(QDockWidget):
         vbox.addWidget(self.__button_1)
         vbox.addWidget(self.__button_2)
 
-        vbox_radio1.addWidget(self.__radio_hor)
-        vbox_radio1.addWidget(self.__radio_vert)
+        vbox_radio1.addWidget(self.__radio_first)
+        vbox_radio1.addWidget(self.__radio_second)
         vbox_radio2.addWidget(self.__radio_semi)
         vbox_radio2.addWidget(self.__radio_comma)
 
@@ -80,6 +83,21 @@ class SideMenu(QDockWidget):
                 alert = Alert("Informacja", "Nie wpisałeś wszystkich wartości", QMessageBox.Information, self)
                 alert.show()
                 return
+            
+            if self.__radio_comma.isChecked():
+                break_sign = ","
+            elif self.__radio_semi.isChecked():
+                break_sign = ";"
+
+            if self.__radio_first.isChecked():
+                type_first = True
+            elif self.__radio_second.isChecked():
+                type_first = False
+            
+            self.parent().display_operation = DisplayOperations(data_shelter.uniterm_1.a, data_shelter.uniterm_1.b, data_shelter.uniterm_2.a, data_shelter.uniterm_2.b, 
+                                                                break_sign, type_first)
+            
+            self.parent().setCentralWidget(self.parent().display_operation)
 
         except Exception as e:
             alert = Alert("Bląd", f"Błąd podczas zamiany unitermów: {e}", QMessageBox.Critical, self)
