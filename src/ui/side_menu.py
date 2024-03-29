@@ -14,6 +14,8 @@ class SideMenu(QDockWidget):
         self.__init_UI()
         self.__set_layouts()
 
+        self.setMaximumSize(161, 400)
+
         self.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
 
     def __init_UI(self) -> None:
