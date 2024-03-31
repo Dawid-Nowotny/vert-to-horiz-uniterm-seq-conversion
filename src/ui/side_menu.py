@@ -22,6 +22,7 @@ class SideMenu(QDockWidget):
         self.__button_1 = QPushButton("Wprowadź pierwszy uniterm")
         self.__button_2 = QPushButton("Wprowadź drugi uniterm")
         self.__confirm_button = QPushButton("Rysuj")
+        self.__clear_button = QPushButton("Wyczyść")
         self.__info_button = QPushButton("Informacja o aplikacji")
 
         self.__radio_group_first_second = QButtonGroup()
@@ -41,6 +42,7 @@ class SideMenu(QDockWidget):
         self.__button_1.clicked.connect(lambda: self.__open_dialog("Wprowadź pierwszy uniterm", "Wprowadź wartość x", "Wprowadź wartość y", True))
         self.__button_2.clicked.connect(lambda: self.__open_dialog("Wprowadź drugi uniterm", "Wprowadź wartość A", "Wprowadź wartość B", False))
         self.__confirm_button.clicked.connect(lambda: self.__confirm())
+        self.__clear_button.clicked.connect(lambda: self.__clear_window())
         self.__info_button.clicked.connect(lambda: self.__open_info_dialog())
 
     def __set_layouts(self) -> None:
@@ -66,6 +68,7 @@ class SideMenu(QDockWidget):
         vbox.addLayout(hbox)
 
         vbox.addWidget(self.__confirm_button)
+        vbox.addWidget(self.__clear_button)
         vbox.addWidget(self.__info_button)
         vbox.addStretch()
 
@@ -107,3 +110,6 @@ class SideMenu(QDockWidget):
         except Exception as e:
             alert = Alert("Bląd", f"Błąd podczas zamiany unitermów: {e}", QMessageBox.Critical, self)
             alert.show()
+    
+    def __clear_window(self) -> None:
+        self.parent().clear_widget()

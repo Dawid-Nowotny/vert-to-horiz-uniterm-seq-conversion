@@ -34,3 +34,7 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 
         self.setGeometry(window_x, window_y, WINDOW_WIDTH, WINDOW_HEIGHT)
+    
+    def clear_widget(self) -> None:
+        self.display_operations = None
+        self.setCentralWidget(self.display_operations)
