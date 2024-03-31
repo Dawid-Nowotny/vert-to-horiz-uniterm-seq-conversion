@@ -3,6 +3,8 @@ from PyQt5.QtGui import QFont, QPixmap
 from PyQt5 import QtCore
 from typing import Optional
 
+from .seq_bracelet_widget import SeqBraceletWidget
+
 class DisplayOperations(QWidget):
     def __init__(self, x: str, y: str, a: str, b: str, break_sign: str, type_first: bool, parent: Optional[QWidget] = None):
         super().__init__(parent)
@@ -28,30 +30,40 @@ class DisplayOperations(QWidget):
         
         top_left_hbox = QHBoxLayout()
         top_left_vbox = QVBoxLayout()
-        
-        top_left_hbox.addWidget(QLabel("(", font = self.__sign_font_vert), alignment=QtCore.Qt.AlignRight | QtCore.Qt.AlignCenter)
+        bracket_1 = SeqBraceletWidget(1, 1, 40, 75, 90 * 16, 180 * 16, 10, 80)
+        bracket_2 = SeqBraceletWidget(1, 1, 75, 40, 30 * 16, 120 * 16, 80, 10)
+
+        top_left_hbox.addStretch()
+        top_left_hbox.addWidget(bracket_1, alignment=QtCore.Qt.AlignRight | QtCore.Qt.AlignCenter)
         top_left_vbox.addItem(QSpacerItem(0, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_left_vbox.addStretch()
         top_left_vbox.addWidget(QLabel(x, font = self.__character_font))
         top_left_vbox.addWidget(QLabel(break_sign, font = self.__break_font), alignment=QtCore.Qt.AlignLeft)
         top_left_vbox.addWidget(QLabel(y, font = self.__character_font))
         top_left_vbox.addStretch()
-        top_left_vbox.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_left_hbox.addLayout(top_left_vbox)
-
+        top_left_vbox.addItem(QSpacerItem(0, 20, QSizePolicy.Minimum, QSizePolicy.Fixed))
+        top_left_hbox.addStretch()
+        
         top_right_vbox = QVBoxLayout()
         top_right_hbox = QHBoxLayout()
 
-        top_right_vbox.addItem(QSpacerItem(0, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_right_vbox.addStretch()
-        top_right_vbox.addWidget((QLabel("︵", font = self.__sign_font_hor)), alignment=QtCore.Qt.AlignBottom | QtCore.Qt.AlignCenter)
+        top_right_vbox.addItem(QSpacerItem(0, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
+        top_right_hbox.addItem(QSpacerItem(7, 0, QSizePolicy.Minimum, QSizePolicy.Fixed))
+        top_right_vbox.addWidget(bracket_2, alignment=QtCore.Qt.AlignBottom | QtCore.Qt.AlignCenter)
+        top_right_hbox.addStretch()
         top_right_hbox.addWidget(QLabel(a, font = self.__character_font), alignment=QtCore.Qt.AlignTop | QtCore.Qt.AlignRight)
+        top_right_hbox.addItem(QSpacerItem(10, 0, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_right_hbox.addWidget(QLabel(break_sign, font = self.__break_font), alignment=QtCore.Qt.AlignTop | QtCore.Qt.AlignCenter)
+        top_right_hbox.addItem(QSpacerItem(10, 0, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_right_hbox.addWidget(QLabel(b, font = self.__character_font), alignment=QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+        top_right_hbox.addItem(QSpacerItem(10, 0, QSizePolicy.Minimum, QSizePolicy.Fixed))
+        top_right_hbox.addStretch()
         top_right_vbox.addLayout(top_right_hbox)
         top_right_vbox.addItem(QSpacerItem(0, 50, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_right_vbox.addStretch()
-
+        
         top_hbox.addLayout(top_left_hbox)
         top_hbox.addLayout(top_right_vbox)
 
