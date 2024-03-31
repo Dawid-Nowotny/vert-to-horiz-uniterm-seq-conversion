@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QDialog, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QMessageBox
+from PyQt5 import QtCore, QtWidgets
 
 from uniterms.uniterm import Uniterm
 from ui.alert import Alert
@@ -24,6 +24,9 @@ class UnitermDialog(QDialog):
         self.__label_2 = QLabel(text_2, self)
         self.__line_edit_2 = QLineEdit(self)
         self.__confirm_button = QPushButton('Zatwierdz', self)
+
+        self.__line_edit_1.setMaxLength(8)
+        self.__line_edit_2.setMaxLength(8)
 
         self.__confirm_button.clicked.connect(lambda: self.__confirm())
 

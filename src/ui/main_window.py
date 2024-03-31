@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 
 from .side_menu import SideMenu
@@ -11,8 +10,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("AppName")
-        #self.setWindowIcon(QIcon("..."))
+        self.setWindowTitle("V2H Uniterm")
 
         self.__init_UI()
         self.__set_geometry()

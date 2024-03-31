@@ -14,7 +14,7 @@ class SideMenu(QDockWidget):
         self.__init_UI()
         self.__set_layouts()
 
-        self.setMaximumSize(161, 400)
+        self.setMaximumSize(162, 400)
 
         self.setAllowedAreas(QtCore.Qt.LeftDockWidgetArea | QtCore.Qt.RightDockWidgetArea)
 
@@ -51,6 +51,8 @@ class SideMenu(QDockWidget):
         vbox_radio2 = QVBoxLayout()
         hbox = QHBoxLayout()
 
+        vbox.addWidget(QWidget())
+
         vbox.addWidget(self.__button_1)
         vbox.addWidget(self.__button_2)
 
@@ -65,6 +67,7 @@ class SideMenu(QDockWidget):
 
         vbox.addWidget(self.__confirm_button)
         vbox.addWidget(self.__info_button)
+        vbox.addStretch()
 
         self.__side_menu_widget.setLayout(vbox)
         self.setWidget(self.__side_menu_widget)

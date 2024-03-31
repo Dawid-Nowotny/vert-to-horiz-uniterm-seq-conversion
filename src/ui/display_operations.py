@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QLabel, QWidget, QSpacerItem, QSizePolicy
-from PyQt5.QtGui import QFont, QPixmap
+from PyQt5.QtGui import QFont
 from PyQt5 import QtCore
 from typing import Optional
 
@@ -32,7 +32,7 @@ class DisplayOperations(QWidget):
 
         top_left_hbox.addStretch()
         top_left_hbox.addWidget(bracket_normal, alignment=QtCore.Qt.AlignRight | QtCore.Qt.AlignCenter)
-        top_left_vbox.addItem(QSpacerItem(0, 10, QSizePolicy.Minimum, QSizePolicy.Fixed))
+        top_left_vbox.addItem(QSpacerItem(0, 15, QSizePolicy.Minimum, QSizePolicy.Fixed))
         top_left_vbox.addStretch()
         top_left_vbox.addWidget(QLabel(x, font = self.__character_font))
         top_left_vbox.addWidget(QLabel(break_sign, font = self.__break_font), alignment=QtCore.Qt.AlignLeft)
@@ -86,8 +86,10 @@ class DisplayOperations(QWidget):
         middle_vbox.addStretch()
 
         result_hbox.addStretch()
+        result_hbox.addItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Expanding))
         result_hbox.addWidget(bracket_normal, alignment=QtCore.Qt.AlignCenter)
         result_hbox.addLayout(middle_vbox)
+        result_hbox.addItem(QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Expanding))
         result_hbox.addStretch()
 
         self.__vbox.addLayout(result_hbox)

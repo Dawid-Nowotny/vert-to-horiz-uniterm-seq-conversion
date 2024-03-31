@@ -1,5 +1,5 @@
-from PyQt5 import QtCore
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel
+from PyQt5 import QtCore
 
 class InfoDialog(QDialog):
     def __init__(self):
