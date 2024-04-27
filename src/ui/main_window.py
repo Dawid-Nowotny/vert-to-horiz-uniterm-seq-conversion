@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 
 from .side_menu import SideMenu
 
-from .config import WINDOW_WIDTH, WINDOW_HEIGHT
+from .constants import WINDOW_WIDTH, WINDOW_HEIGHT
 
 class MainWindow(QMainWindow):
     def __init__(self):
